@@ -11,7 +11,7 @@ const Burger = (props) => {
   }).reduce((prevArr, el) => {
     return prevArr.concat(el)
   }, [])
-  if (currentBurgerIngredients.length == 0) {
+  if (currentBurgerIngredients.length === 0) {
     currentBurgerIngredients = "Please add ingredients!"
   }
 

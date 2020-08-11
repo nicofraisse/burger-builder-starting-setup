@@ -9,3 +9,23 @@
   margin: auto;
   padding: 10px 0;
 }
+
+.PurchasePrice {
+  text-align: center;
+  font-weight: bold;
+}
+
+.OrderButton {
+  margin: 16px;
+  padding: 16px;
+  border-radius: 0px;
+  font-size: 18px;
+  background-color: rgb(120, 225, 160);
+  transition: 0.1s background-color, 0.1s color;
+}
+
+.OrderButton:hover {
+  background-color: rgb(30, 60, 40);
+  color: white;
+  cursor: pointer;
+}

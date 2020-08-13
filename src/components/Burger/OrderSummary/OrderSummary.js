@@ -7,7 +7,7 @@ class OrderSummary extends Component {
 
   // Here we just want to check if modal updates when we add/remove ingredients
   componentWillUpdate() {
-    console.log("[OrderSummary] Will Update");
+    // console.log("[OrderSummary] Will Update");
   }
 
   render() {

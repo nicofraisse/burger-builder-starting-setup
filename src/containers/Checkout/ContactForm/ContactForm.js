@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Button from '../../../components/UI/Button/Button';
 import classes from './ContactForm.css';
 import axios from '../../../axios-orders';
@@ -14,7 +15,7 @@ class ContactForm extends Component {
           type: 'text',
           placeholder: 'Your name'
         },
-        value: 'Nicolas',
+        value: '',
         validation: {
           required: true,
           minLength: true
@@ -28,7 +29,7 @@ class ContactForm extends Component {
           type: 'text',
           placeholder: 'Your address'
         },
-        value: '7318 rue des pommes',
+        value: '',
         validation: {
           required: true,
         },
@@ -41,7 +42,7 @@ class ContactForm extends Component {
           type: 'text',
           placeholder: 'Your city'
         },
-        value: 'Montreal',
+        value: '',
         validation: {
           required: true,
         },
@@ -54,7 +55,7 @@ class ContactForm extends Component {
           type: 'text',
           placeholder: 'Your country'
         },
-        value: 'Canada',
+        value: '',
         validation: {
           required: true,
         },
@@ -67,7 +68,7 @@ class ContactForm extends Component {
           type: 'email',
           placeholder: 'Your email'
         },
-        value: 'nicolas@gmail.com',
+        value: '',
         validation: {
           required: true,
         },
@@ -101,7 +102,7 @@ class ContactForm extends Component {
     if (rules.minLength) {
       isValid = (value.length >= 5) && isValid;
     }
-    // console.log(isValid)
+    console.log('checking if valid...', isValid)
     return isValid;
   }
 
@@ -121,7 +122,6 @@ class ContactForm extends Component {
     for (let i in updatedOrderForm) {
       formIsValid = updatedOrderForm[i].valid && formIsValid;
     }
-    console.log('form is valid?', formIsValid)
     updatedOrderForm[inputIdentifier] = updatedFormElement;
     this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
   }
@@ -135,7 +135,7 @@ class ContactForm extends Component {
     }
 
     const order = {
-      ingredients: this.props.ingredients,
+      ingredients: this.props.ings,
       price: this.props.price,
       orderData: formData
     }
@@ -166,6 +166,7 @@ class ContactForm extends Component {
             return (
               <Input
               key={e.id}
+              label={e.config.elementConfig.placeholder}
               elementType={e.config.elementType}
               elementConfig={e.config.elementConfig}
               value={e.config.value}
@@ -197,4 +198,11 @@ class ContactForm extends Component {
   }
 }
 
-export default ContactForm;
+const mapStateToProps = state => {
+  return {
+    ings: state.ingredients,
+    price: state.totalPrice
+  }
+}
+
+export default connect(mapStateToProps)(ContactForm);
